@@ -32,11 +32,11 @@ func (p *Routes)ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path == "/token/symbol" { controllers.GetSymbol(w, r);	return }
 
 	if r.URL.Path == "/token/paused" { controllers.GetPausedStatus(w, r);	return }
+
+	if r.URL.Path == "/token/owner" { controllers.GetOwner(w, r);	return }
+
+	if r.URL.Path == "/token/name" { controllers.GetName(w, r);	return }
 /*
-	if r.URL.Path == "/token/owner" { getOwner(w, r);	return }
-
-	if r.URL.Path == "/token/name" { getName(w, r);	return }
-
 	if r.URL.Path == "/token/mintingFinished" { getMintingFinished(w, r);	return }
 
 	//  address _wallet

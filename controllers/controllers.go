@@ -15,7 +15,8 @@ import (
 	"net/http"
 )
 
-// TODO: Add condition for catch exceptions
+// TODO: Add condition for catch exceptions.
+// TODO: Refactor generate auth, session, connect.
 
 const (
 	contractAddress = "0x035483Bc81b0982a07966522510AA6Ff761dE848"
@@ -116,9 +117,41 @@ func GetPausedStatus(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(data)
 }
 
+func GetOwner(w http.ResponseWriter, r *http.Request) {
+	rpc_cli, _ := ethclient.Dial(connectionString)
+	model.Connect = rpc_cli
 
+	auth, _ := generateAuth()
 
+	session, _ := createPowerTokenSession(auth)
 
+	total, _ := session.Owner()
+
+	data := &model.BasicAddressResp{}
+
+	data.Address = total
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(data)
+}
+
+func GetName(w http.ResponseWriter, r *http.Request) {
+	rpc_cli, _ := ethclient.Dial(connectionString)
+	model.Connect = rpc_cli
+
+	auth, _ := generateAuth()
+
+	session, _ := createPowerTokenSession(auth)
+
+	total, _ := session.Name()
+
+	data := &model.BasicStringResp{}
+
+	data.Result = total
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(data)
+}
 
 
 
