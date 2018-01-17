@@ -27,6 +27,14 @@ const (
 	INFURANET
 )
 
+type BasicStringResp struct {
+	Result string `json:"result"`
+}
+
+type BasicBoolResp struct {
+	Result bool `json:"result"`
+}
+
 type User struct {
 	TransactOpts *bind.TransactOpts
 	PrivateKey   string
@@ -123,7 +131,7 @@ type AllowanceReq_Token struct {
 	Spender string `json:"spender"`
 }
 
-type TotalSupplyResp_Token struct {
+type TotalSupplyResp struct {
 	Result string `json:"result"`
 }
 
